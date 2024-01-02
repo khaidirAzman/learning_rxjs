@@ -8,20 +8,19 @@
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item active">
-        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">About</a>
+        <div class="nav-link navigationItem" (click)="navigate('')">
+          Home <span class="sr-only">(current)</span>
+        </div>
       </li>
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           RxJS
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="#">Http</a>
-          <a class="dropdown-item" href="#">Event handler</a>
-          <a class="dropdown-item" href="#">State management</a>
-          <a class="dropdown-item" href="#">Web sockets</a>
+          <div class="dropdown-item navigationItem" (click)="navigate('http')">Http</div>
+          <div class="dropdown-item navigationItem" (click)="navigate('http')">Event handler</div>
+          <div class="dropdown-item navigationItem" (click)="navigate('http')">State management</div>
+          <div class="dropdown-item navigationItem" (click)="navigate('http')">Web sockets</div>
         </div>
       </li>
     </ul>
@@ -35,7 +34,7 @@
 <!--    <div class="carousel col-sm" style="width: 750px;">-->
 <!--      <app-carousel></app-carousel>-->
 <!--    </div>-->
-    <app-home></app-home>
+    <router-outlet></router-outlet>
   </div>
 </div>
 <footer style="position: absolute">

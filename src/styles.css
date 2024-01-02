@@ -3,3 +3,16 @@
 .selector-for-some-widget {
   box-sizing: content-box;
 }
+
+footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 50px;
+  border-top: solid 1px;
+  text-align: center;
+}
+
+.navigationItem {
+  cursor: pointer;
+}
