@@ -15,7 +15,7 @@ export class AppComponent {
   title = 'rxjsTutorial';
   constructor(private router:Router) {
   }
-  navigate(path: string) {
+  navigateToPage(path: string) {
     this.router.navigate([path])
       .then(function () {
         console.log('success to Path: ', path);

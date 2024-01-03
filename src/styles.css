@@ -11,6 +11,8 @@ footer {
   height: 50px;
   border-top: solid 1px;
   text-align: center;
+  background: #580664;
+  color: white;
 }
 
 .navigationItem {
