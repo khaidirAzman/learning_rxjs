@@ -8,19 +8,19 @@
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item">
-        <div class="nav-link navigationItem" (click)="navigateToPage('')">
+        <a class="nav-link navigationItem" routerLink="/">
           Home <span class="sr-only">(current)</span>
-        </div>
+        </a>
       </li>
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           RxJS
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <div class="dropdown-item navigationItem" (click)="navigateToPage('http')">Http</div>
-          <div class="dropdown-item navigationItem" (click)="navigateToPage('event')">Event handler</div>
-          <div class="dropdown-item navigationItem" (click)="navigateToPage('state')">State management</div>
-          <div class="dropdown-item navigationItem" (click)="navigateToPage('websockets')">Web sockets</div>
+          <a class="dropdown-item navigationItem" routerLink="/http">HTTP</a>
+          <a class="dropdown-item navigationItem" routerLink="/event">Event Handler</a>
+          <a class="dropdown-item navigationItem" routerLink="/state">State Management</a>
+          <a class="dropdown-item navigationItem" routerLink="/websockets">Websockets</a>
         </div>
       </li>
     </ul>
