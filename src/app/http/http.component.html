@@ -14,4 +14,87 @@
       <li>forkJoin </li>
     </ul>
   </div>
+  <div class="row">
+    <div class="col-sm-3">
+      <label>Covid cases by country:</label>
+      <input class="form-control" type="text" id="country" #country>
+      <button style="margin-top: 1rem" class="btn btn-primary" (click)="getCovidInfo(country.value)">Submit</button>
+    </div>
+    <div class="col-sm" *ngIf="noDataToDisplay" style="font-style: italic">{{noDataToDisplay}}</div>
+    <div class="col-sm-9">
+      <ngx-charts-bar-vertical *ngIf="chartCovidCases?.length"
+                               [view]="[1200,400]"
+                               [results]="chartCovidCases"
+                               [gradient]="gradient"
+                               [xAxis]="showXAxis"
+                               [yAxis]="showYAxis"
+                               [legend]="showLegend"
+                               [showXAxisLabel]="showXAxisLabel"
+                               [showYAxisLabel]="showYAxisLabel"
+                               [xAxisLabel]="xAxisLabel"
+                               [yAxisLabel]="yAxisLabel">
+      </ngx-charts-bar-vertical>
+    </div>
+    <div class="col-sm-12">
+      <div *ngIf="covid?.country ">
+        {{covid?.country}} cases from {{covidCases ? covidCases[1000].date : 0}}
+      </div>
+      <div class="row">
+        <div class="col-sm-4" *ngIf="covid" style="margin-top: 1rem">
+          <table class="table">
+            <thead class="thead-dark">
+            <tr>
+              <th scope="col">Date</th>
+              <th scope="col">New cases</th>
+              <th scope="col">Total cases</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let covid19 of covidCases | slice:1000:1010;let i = index">
+              <th scope="row">{{covid19.date}}</th>
+              <td>{{covid19.new}}</td>
+              <td>{{covid19.total}}</td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="col-sm-4" *ngIf="covid" style="margin-top: 1rem">
+          <table class="table">
+            <thead class="thead-dark">
+            <tr>
+              <th scope="col">Date</th>
+              <th scope="col">New cases</th>
+              <th scope="col">Total cases</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let covid19 of covidCases | slice:1011:1021;let i = index">
+              <th scope="row">{{covid19.date}}</th>
+              <td>{{covid19.new}}</td>
+              <td>{{covid19.total}}</td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="col-sm-4" *ngIf="covid" style="margin-top: 1rem">
+          <table class="table">
+            <thead class="thead-dark">
+            <tr>
+              <th scope="col">Date</th>
+              <th scope="col">New cases</th>
+              <th scope="col">Total cases</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let covid19 of covidCases | slice:1022:1032;let i = index">
+              <th scope="row">{{covid19.date}}</th>
+              <td>{{covid19.new}}</td>
+              <td>{{covid19.total}}</td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
