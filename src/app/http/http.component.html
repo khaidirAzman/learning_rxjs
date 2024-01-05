@@ -14,14 +14,39 @@
       <li>forkJoin </li>
     </ul>
   </div>
+  <p>
+    In this example, we made a HTTP call to get covid cases and deaths by country for year 2020 until 2023.
+    HTTP GET is from <a href="https://api-ninjas.com/api/covid19" target="_blank">API ninja.</a>
+  </p>
   <div class="row">
     <div class="col-sm-3">
-      <label>Covid cases by country:</label>
-      <input class="form-control" type="text" id="country" #country>
-      <button style="margin-top: 1rem" class="btn btn-primary" (click)="getCovidInfo(country.value)">Submit</button>
+      <select class="form-select form-control" aria-label="Default select example" id="country" #country>
+        <option value="" disabled selected hidden>Select a country...</option>
+        <option value="malaysia">Brazil</option>
+        <option value="canada">Canada</option>
+        <option value="malaysia">France</option>
+        <option value="malaysia">Japan</option>
+        <option value="malaysia">Malaysia</option>
+        <option value="singapore">Singapore</option>
+        <option value="malaysia">South Korea</option>
+        <option value="united states">United States</option>
+    </select>
+      <button style="margin-top: 3px" *ngIf="!isLoading"
+              class="btn btn-primary" (click)="getCovidInfo(country.value)">
+        Submit
+      </button>
+      <div class="spinner-grow spinner-grow-sm" role="status" *ngIf="isLoading" style="margin-left: 1rem">
+        <span class="sr-only">Loading...</span>
+      </div>
+      <div class="spinner-grow spinner-grow-sm" role="status" *ngIf="isLoading" style="margin-left: 1rem">
+        <span class="sr-only">Loading...</span>
+      </div>
+      <div class="spinner-grow spinner-grow-sm" role="status" *ngIf="isLoading" style="margin-left: 1rem">
+        <span class="sr-only">Loading...</span>
+      </div>
     </div>
     <div class="col-sm" *ngIf="noDataToDisplay" style="font-style: italic">{{noDataToDisplay}}</div>
-    <div class="col-sm-9">
+    <div class="col-sm-12" *ngIf="!isLoading">
       <ngx-charts-bar-vertical *ngIf="chartCovidCases?.length"
                                [view]="[1200,400]"
                                [results]="chartCovidCases"
@@ -32,15 +57,29 @@
                                [showXAxisLabel]="showXAxisLabel"
                                [showYAxisLabel]="showYAxisLabel"
                                [xAxisLabel]="xAxisLabel"
-                               [yAxisLabel]="yAxisLabel">
+                               [yAxisLabel]="'New cases'">
       </ngx-charts-bar-vertical>
     </div>
-    <div class="col-sm-12">
+    <div class="col-sm-12" *ngIf="!isLoading">
+      <ngx-charts-bar-vertical *ngIf="chartCovidDeath?.length"
+                               [view]="[1200,400]"
+                               [results]="chartCovidDeath"
+                               [gradient]="gradient"
+                               [xAxis]="showXAxis"
+                               [yAxis]="showYAxis"
+                               [legend]="showLegend"
+                               [showXAxisLabel]="showXAxisLabel"
+                               [showYAxisLabel]="showYAxisLabel"
+                               [xAxisLabel]="xAxisLabel"
+                               [yAxisLabel]="'Death cases'">
+      </ngx-charts-bar-vertical>
+    </div>
+    <div class="col-sm-12" *ngIf="!isLoading">
       <div *ngIf="covid?.country ">
         {{covid?.country}} cases from {{covidCases ? covidCases[1000].date : 0}}
       </div>
       <div class="row">
-        <div class="col-sm-4" *ngIf="covid" style="margin-top: 1rem">
+        <div class="col-sm-5" *ngIf="covid" style="margin-top: 1rem">
           <table class="table">
             <thead class="thead-dark">
             <tr>
@@ -50,7 +89,7 @@
             </tr>
             </thead>
             <tbody>
-            <tr *ngFor="let covid19 of covidCases | slice:1000:1010;let i = index">
+            <tr *ngFor="let covid19 of covidCases | slice:1000:1020;let i = index">
               <th scope="row">{{covid19.date}}</th>
               <td>{{covid19.new}}</td>
               <td>{{covid19.total}}</td>
@@ -58,35 +97,17 @@
             </tbody>
           </table>
         </div>
-        <div class="col-sm-4" *ngIf="covid" style="margin-top: 1rem">
+        <div class="col-sm-5" *ngIf="covidDeath" style="margin-top: 1rem">
           <table class="table">
             <thead class="thead-dark">
             <tr>
               <th scope="col">Date</th>
-              <th scope="col">New cases</th>
-              <th scope="col">Total cases</th>
+              <th scope="col">New death</th>
+              <th scope="col">Total death</th>
             </tr>
             </thead>
             <tbody>
-            <tr *ngFor="let covid19 of covidCases | slice:1011:1021;let i = index">
-              <th scope="row">{{covid19.date}}</th>
-              <td>{{covid19.new}}</td>
-              <td>{{covid19.total}}</td>
-            </tr>
-            </tbody>
-          </table>
-        </div>
-        <div class="col-sm-4" *ngIf="covid" style="margin-top: 1rem">
-          <table class="table">
-            <thead class="thead-dark">
-            <tr>
-              <th scope="col">Date</th>
-              <th scope="col">New cases</th>
-              <th scope="col">Total cases</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr *ngFor="let covid19 of covidCases | slice:1022:1032;let i = index">
+            <tr *ngFor="let covid19 of covidDeathCases | slice:1000:1020;let i = index">
               <th scope="row">{{covid19.date}}</th>
               <td>{{covid19.new}}</td>
               <td>{{covid19.total}}</td>
