@@ -16,4 +16,50 @@
       <li>fromEventPattern</li>
     </ul>
   </div>
+  <p>
+    In this simple example, we observed the click event of <i class="fa fa-thumbs-up"></i> icon to get
+    most-liked BMW car.
+  </p>
+  <div class="spinner-grow spinner-grow-sm" role="status" *ngIf="isLoading" style="margin-left: 1rem">
+    <span class="sr-only">Loading...</span>
+  </div>
+  <div class="spinner-grow spinner-grow-sm" role="status" *ngIf="isLoading" style="margin-left: 1rem">
+    <span class="sr-only">Loading...</span>
+  </div>
+  <div class="spinner-grow spinner-grow-sm" role="status" *ngIf="isLoading" style="margin-left: 1rem">
+    <span class="sr-only">Loading...</span>
+  </div>
+  <div class="row" *ngIf="!isLoading">
+    <div class="card text-center col-sm-2"
+         *ngFor="let car of cars;let i=index" style="margin:0 10px 10px 0">
+      <div class="card-header">
+        {{car.year}}
+      </div>
+      <div class="card-body">
+        <div style="min-height: 50px;margin:0 10px 0 0">
+          <h5 class="card-title">{{car.model.toUpperCase()}}</h5>
+        </div>
+        <p class="card-text">{{car.class}}</p>
+        <p class="card-text">{{car.transmission==='a' ? 'Automatic':'Manual'}}</p>
+        <p class="card-text">{{car.cylinders}} cylinders</p>
+        <p class="card-text">{{car.rating}}</p>
+        <button class="btn btn-primary" (click)="addRating(car)"><i class="fa fa-thumbs-up"></i></button>
+      </div>
+    </div>
+    <div *ngIf="!cars?.length">No data to display...</div>
+    <div class="col-sm-3">
+      <div *ngIf="cars?.length" class="card text-center" style="max-height: 100px">
+        <div class="card-header">
+          Best-rated car
+        </div>
+        <div class="card-body" *ngIf="bestCar">
+          <h5 class="card-title">{{bestCar.model.toUpperCase()}}</h5>
+        </div>
+      </div>
+      Brand:
+      <input #brand type="text" id="brand" class="form-control"
+             placeholder="BMW, Ferrari, Porsche etc..">
+      <button class="btn btn-success" id="nextModel" style="margin-top: 1rem" (click)="getAllCars(brand.value)">GET</button>
+    </div>
+  </div>
 </div>

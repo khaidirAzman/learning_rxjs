@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {HttpService} from "../http.service";
 import {FormsModule} from "@angular/forms";
 import {NgForOf, NgIf} from "@angular/common";
@@ -19,7 +19,7 @@ import {forkJoin} from "rxjs";
   styleUrl: './http.component.css'
 })
 
-export class HttpComponent {
+export class HttpComponent implements OnInit{
   covid: any | undefined;
   covidCases: any[] | undefined;
   chartCovidCases: any[] | undefined;
