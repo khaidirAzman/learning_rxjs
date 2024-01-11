@@ -67,6 +67,7 @@ export class EventHandlerComponent implements OnInit, OnDestroy{
     this.getAllCars(searchValue);
   }
   ngOnInit(){
+    console.log('Component is subscribed');
     this.brandInput$.pipe(
       debounceTime(500),
       distinctUntilChanged() //prevent Observable from emitting same value multiple times in a row
@@ -75,6 +76,7 @@ export class EventHandlerComponent implements OnInit, OnDestroy{
     });
   }
   ngOnDestroy() {
-    this.brandInput$.complete();
+    this.brandInput$.complete(); //Observers will automatically be unsubscribed when complete is called
+    console.log('Component is destroyed');
   }
 }
