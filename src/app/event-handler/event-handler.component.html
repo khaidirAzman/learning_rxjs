@@ -1,0 +1,60 @@
+<div class="col-sm">
+  <div class="jumbotron" style="margin-top: 3rem">
+    <h1 class="display-4">Event Handler</h1>
+    <p class="lead">
+      RxJS can be useful in capturing events that's happening on UI with its Observables.
+    </p>
+    <hr class="my-4">
+    <p>Here are some RxJS methods for Event Handling:</p>
+    <ul>
+      <li>pipe</li>
+      <li>debounceTime</li>
+      <li>distinctUntilChanged</li>
+    </ul>
+  </div>
+  <p>
+    In this example, we observed keyup event of input field and make a HTTP call after 500ms debounce time.
+    HTTP GET is from <a href="https://api-ninjas.com/api/cars" target="_blank">API ninja.</a>
+  </p>
+  <div class="spinner-grow spinner-grow-sm" role="status" *ngIf="isLoading" style="margin-left: 1rem">
+    <span class="sr-only">Loading...</span>
+  </div>
+  <div class="spinner-grow spinner-grow-sm" role="status" *ngIf="isLoading" style="margin-left: 1rem">
+    <span class="sr-only">Loading...</span>
+  </div>
+  <div class="spinner-grow spinner-grow-sm" role="status" *ngIf="isLoading" style="margin-left: 1rem">
+    <span class="sr-only">Loading...</span>
+  </div>
+  <div class="row" *ngIf="!isLoading">
+    <div class="card text-center col-sm-2"
+         *ngFor="let car of cars;let i=index" style="margin:0 10px 10px 0">
+      <div class="card-header">
+        {{car.year}}
+      </div>
+      <div class="card-body">
+        <div style="min-height: 50px;margin:0 10px 0 0">
+          <h5 class="card-title">{{car.model.toUpperCase()}}</h5>
+        </div>
+        <p class="card-text">{{car.class | firstLetterUppercase}}</p>
+        <p class="card-text">{{car.transmission==='a' ? 'Automatic':'Manual'}}</p>
+        <p class="card-text">{{car.cylinders}} cylinders</p>
+        <p class="card-text">{{car.rating}} {{car.rating > 1 ? 'Likes' : 'Like'}}</p>
+        <button class="btn btn-primary" (click)="addRating(car)"><i class="fa fa-thumbs-up"></i></button>
+      </div>
+    </div>
+    <div *ngIf="!cars?.length">No data to display...</div>
+    <div class="col-sm-3">
+      <div *ngIf="cars?.length" class="card text-center" style="max-height: 200px">
+        <div class="card-header">
+          Best-rated car
+        </div>
+        <div class="card-body" *ngIf="bestCar">
+          <h5 class="card-title">{{bestCar.model.toUpperCase()}}</h5>
+          <h5 class="card-title">{{bestCar.rating}} {{bestCar.rating > 1 ? 'Likes' : 'Like'}}</h5>
+        </div>
+      </div>
+      Brand:
+      <input type="text" id="brand" class="form-control" (keyup)="search(getValue($event))"
+             placeholder="BMW, Ferrari, Porsche etc.."></div>
+  </div>
+</div>

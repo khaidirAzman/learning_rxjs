@@ -1,5 +1,21 @@
 /* You can add global styles to this file, and also import other style files */
+@import "font-awesome/css/font-awesome.css";
 
 .selector-for-some-widget {
   box-sizing: content-box;
+}
+
+footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 50px;
+  border-top: solid 1px;
+  text-align: center;
+  background: #580664;
+  color: white;
+}
+
+.navigationItem {
+  cursor: pointer;
 }
