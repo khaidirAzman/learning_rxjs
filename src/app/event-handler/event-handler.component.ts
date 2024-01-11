@@ -1,19 +1,23 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {HttpService} from "../http.service";
-import {forkJoin} from "rxjs";
+import {debounceTime, distinctUntilChanged, forkJoin, switchMap} from "rxjs";
 import {NgForOf, NgIf} from "@angular/common";
+import {FirstLetterUppercasePipe} from "../first-letter-uppercase.pipe";
+import {Subject} from "rxjs";
 
 @Component({
   selector: 'app-event-handler',
   standalone: true,
   imports: [
     NgForOf,
-    NgIf
+    NgIf,
+    FirstLetterUppercasePipe
   ],
   templateUrl: './event-handler.component.html',
   styleUrl: './event-handler.component.css'
 })
-export class EventHandlerComponent implements OnInit{
+export class EventHandlerComponent implements OnInit, OnDestroy{
+  brandInput$ = new Subject<string>();
   cars: any[] | undefined;
   bestCar:any;
   //loader
@@ -41,19 +45,36 @@ export class EventHandlerComponent implements OnInit{
         this.isLoading = false;
         this.cars=response[0];
         this.cars?.forEach((car)=>car.rating = 0);
-        // this.addObservables();
         },
       error:(e) => {
         console.log(e);
         this.isLoading = false;
         },
       complete: () => {
-        console.info('Device data received');
+        console.info('Cars data received');
       }
     });
   }
-
+  getValue(event: Event): string {
+    return (event.target as HTMLInputElement).value;
+  }
+  search(brandName: string) {
+    this.brandInput$.next(brandName);
+  }
+  performSearch(searchValue: string) {
+    // Perform the actual search operation here
+    console.log('Performing search for:', searchValue);
+    this.getAllCars(searchValue);
+  }
   ngOnInit(){
-    // this.getAllCars();
+    this.brandInput$.pipe(
+      debounceTime(500),
+      distinctUntilChanged() //prevent Observable from emitting same value multiple times in a row
+    ).subscribe(searchValue => {
+      this.performSearch(searchValue);
+    });
+  }
+  ngOnDestroy() {
+    this.brandInput$.complete();
   }
 }

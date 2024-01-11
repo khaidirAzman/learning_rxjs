@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {HttpService} from "../http.service";
 import {FormsModule} from "@angular/forms";
 import {NgForOf, NgIf} from "@angular/common";
@@ -19,7 +19,7 @@ import {forkJoin} from "rxjs";
   styleUrl: './http.component.css'
 })
 
-export class HttpComponent implements OnInit{
+export class HttpComponent implements OnInit, OnDestroy{
   covid: any | undefined;
   covidCases: any[] | undefined;
   chartCovidCases: any[] | undefined;
@@ -41,6 +41,8 @@ export class HttpComponent implements OnInit{
   isLoading=false;
   constructor(private  httpService: HttpService) {}
   ngOnInit() {
+  }
+  ngOnDestroy() {
   }
   //This deprecation was introduced in RxJS 6.4.
   // this.httpService.getPosts().subscribe(

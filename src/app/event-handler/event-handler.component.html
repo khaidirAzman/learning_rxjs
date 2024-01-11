@@ -2,23 +2,19 @@
   <div class="jumbotron" style="margin-top: 3rem">
     <h1 class="display-4">Event Handler</h1>
     <p class="lead">
-      RxJS provides factory methods to bridge with existing asynchronous sources in the DOM or Node.js
-      so that you can employ the rich composing, filtering and resource management features provided by RxJS
-      on any kind of data streams. This topic examines the fromEvent and fromEventPattern operator that
-      allows "importing" a DOM or custom event into RxJS as an observable sequence. Every time an event
-      is raised, an onNext message will be delivered to the observable sequence. You can then manipulate
-      event data just like any other observable sequences.
+      RxJS can be useful in capturing events that's happening on UI with its Observables.
     </p>
     <hr class="my-4">
-    <p>Here are some RxJS methods for Events:</p>
+    <p>Here are some RxJS methods for Event Handling:</p>
     <ul>
-      <li>fromEvent</li>
-      <li>fromEventPattern</li>
+      <li>pipe</li>
+      <li>debounceTime</li>
+      <li>distinctUntilChanged</li>
     </ul>
   </div>
   <p>
-    In this simple example, we observed the click event of <i class="fa fa-thumbs-up"></i> icon to get
-    most-liked BMW car.
+    In this example, we observed keyup event of input field and make a HTTP call after 500ms debounce time.
+    HTTP GET is from <a href="https://api-ninjas.com/api/cars" target="_blank">API ninja.</a>
   </p>
   <div class="spinner-grow spinner-grow-sm" role="status" *ngIf="isLoading" style="margin-left: 1rem">
     <span class="sr-only">Loading...</span>
@@ -39,27 +35,26 @@
         <div style="min-height: 50px;margin:0 10px 0 0">
           <h5 class="card-title">{{car.model.toUpperCase()}}</h5>
         </div>
-        <p class="card-text">{{car.class}}</p>
+        <p class="card-text">{{car.class | firstLetterUppercase}}</p>
         <p class="card-text">{{car.transmission==='a' ? 'Automatic':'Manual'}}</p>
         <p class="card-text">{{car.cylinders}} cylinders</p>
-        <p class="card-text">{{car.rating}}</p>
+        <p class="card-text">{{car.rating}} {{car.rating > 1 ? 'Likes' : 'Like'}}</p>
         <button class="btn btn-primary" (click)="addRating(car)"><i class="fa fa-thumbs-up"></i></button>
       </div>
     </div>
     <div *ngIf="!cars?.length">No data to display...</div>
     <div class="col-sm-3">
-      <div *ngIf="cars?.length" class="card text-center" style="max-height: 100px">
+      <div *ngIf="cars?.length" class="card text-center" style="max-height: 200px">
         <div class="card-header">
           Best-rated car
         </div>
         <div class="card-body" *ngIf="bestCar">
           <h5 class="card-title">{{bestCar.model.toUpperCase()}}</h5>
+          <h5 class="card-title">{{bestCar.rating}} {{bestCar.rating > 1 ? 'Likes' : 'Like'}}</h5>
         </div>
       </div>
       Brand:
-      <input #brand type="text" id="brand" class="form-control"
-             placeholder="BMW, Ferrari, Porsche etc..">
-      <button class="btn btn-success" id="nextModel" style="margin-top: 1rem" (click)="getAllCars(brand.value)">GET</button>
-    </div>
+      <input type="text" id="brand" class="form-control" (keyup)="search(getValue($event))"
+             placeholder="BMW, Ferrari, Porsche etc.."></div>
   </div>
 </div>

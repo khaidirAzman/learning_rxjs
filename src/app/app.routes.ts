@@ -10,8 +10,7 @@ export const routes: Routes = [
   {path: '', component:HomeComponent},
   {path: 'http', component:HttpComponent},
   {path: 'event', component:EventHandlerComponent},
-  {path: 'state', component:StateManagementComponent},
-  {path: 'websockets', component:WebsocketsComponent},
+  {path: 'state', component:StateManagementComponent}
 ];
 
 @NgModule({
