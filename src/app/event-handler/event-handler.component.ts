@@ -69,7 +69,7 @@ export class EventHandlerComponent implements OnInit, OnDestroy{
   ngOnInit(){
     console.log('Component is subscribed');
     this.brandInput$.pipe(
-      debounceTime(500),
+      debounceTime(1000),
       distinctUntilChanged() //prevent Observable from emitting same value multiple times in a row
     ).subscribe(searchValue => {
       this.performSearch(searchValue);

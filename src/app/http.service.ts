@@ -7,6 +7,7 @@ import {HttpClient} from "@angular/common/http";
 export class HttpService {
   private covid19 = 'https://api.api-ninjas.com/v1/covid19?country=';
   private cars = 'https://api.api-ninjas.com/v1/cars?limit=3&model=';
+  private currency = 'https://api.api-ninjas.com/v1/convertcurrency?';
   constructor(private http:HttpClient) { }
   apiKeyNinja = 't0DH9saZ5NNhESuAjCVp8A==hcmojPSVmad46KMG';
   getCovidCasesByCountry(country:string) {
@@ -20,6 +21,11 @@ export class HttpService {
 
   getCars(brand:string) {
     return this.http.get(this.cars+brand,
+      {headers:{ 'X-Api-Key': this.apiKeyNinja}});
+  }
+
+  getCurrency(have:string, want:string, amount:number){
+    return this.http.get(this.currency+'have='+have+'&want='+want+'&amount='+amount,
       {headers:{ 'X-Api-Key': this.apiKeyNinja}});
   }
 }

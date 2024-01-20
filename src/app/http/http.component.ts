@@ -57,49 +57,57 @@ export class HttpComponent implements OnInit, OnDestroy{
     $q.subscribe({
         next:(response:any) => {
           this.isLoading = false;
+          let isCasesEmpty = !!response[0][0].cases;
+          let isDeathEmpty = !!response[1][0].deaths;
           if (response.length > 0){
             this.covid = response[0][0];
             this.covidDeath = response[1][0];
+            if(isCasesEmpty){
+              //cases
+              let caseObject = this.covid.cases;
+              let casesKey = Object.keys(caseObject);
+              let tempCovidCases = [];
+              let chartCovidCases = [];
 
-            //cases
-            let caseObject = this.covid.cases;
-            let casesKey = Object.keys(caseObject);
-            let tempCovidCases = [];
-            let chartCovidCases = [];
-
-            for(let i=0;i<casesKey.length;i++){
-              let tempCase = {"date":casesKey[i],"new":0,"total":0};
-              let chartCase = {"name":casesKey[i],"value":0};
-              //for table
-              tempCase.new = caseObject[casesKey[i]].new;
-              tempCase.total = caseObject[casesKey[i]].total;
-              tempCovidCases?.push(tempCase);
-              //for chart
-              chartCase.value = caseObject[casesKey[i]].new;
-              chartCovidCases?.push(chartCase);
+              for(let i=0;i<casesKey.length;i++){
+                let tempCase = {"date":casesKey[i],"new":0,"total":0};
+                let chartCase = {"name":casesKey[i],"value":0};
+                //for table
+                tempCase.new = caseObject[casesKey[i]].new;
+                tempCase.total = caseObject[casesKey[i]].total;
+                tempCovidCases?.push(tempCase);
+                //for chart
+                chartCase.value = caseObject[casesKey[i]].new;
+                chartCovidCases?.push(chartCase);
+              }
+              this.covidCases = tempCovidCases;
+              this.chartCovidCases = chartCovidCases;
             }
-            this.covidCases = tempCovidCases;
-            this.chartCovidCases = chartCovidCases;
 
-            //deaths
-            let deathCaseObject = this.covidDeath.deaths;
-            let deathCasesKey = Object.keys(deathCaseObject);
-            let tempCovidDeath = [];
-            let chartCovidDeathLocal = [];
+            if(isDeathEmpty){
+              //deaths
+              let deathCaseObject = this.covidDeath.deaths;
+              let deathCasesKey = Object.keys(deathCaseObject);
+              let tempCovidDeath = [];
+              let chartCovidDeathLocal = [];
 
-            for(let i=0;i<casesKey.length;i++){
-              let tempDeathCase = {"date":deathCasesKey[i],"new":0,"total":0};
-              let chartDeathCase = {"name":deathCasesKey[i],"value":0};
-              //for table
-              tempDeathCase.new = deathCaseObject[deathCasesKey[i]].new;
-              tempDeathCase.total = deathCaseObject[deathCasesKey[i]].total;
-              tempCovidDeath?.push(tempDeathCase);
-              //for chart
-              chartDeathCase.value = deathCaseObject[casesKey[i]].new;
-              chartCovidDeathLocal?.push(chartDeathCase);
+              for(let i=0;i<deathCasesKey.length;i++){
+                let tempDeathCase = {"date":deathCasesKey[i],"new":0,"total":0};
+                let chartDeathCase = {"name":deathCasesKey[i],"value":0};
+                //for table
+                tempDeathCase.new = deathCaseObject[deathCasesKey[i]].new;
+                tempDeathCase.total = deathCaseObject[deathCasesKey[i]].total;
+                tempCovidDeath?.push(tempDeathCase);
+                //for chart
+                chartDeathCase.value = deathCaseObject[deathCasesKey[i]].new;
+                chartCovidDeathLocal?.push(chartDeathCase);
+              }
+              this.covidDeathCases = tempCovidDeath;
+              this.chartCovidDeath = chartCovidDeathLocal;
             }
-            this.covidDeathCases = tempCovidDeath;
-            this.chartCovidDeath = chartCovidDeathLocal;
+            if(!isCasesEmpty && !isDeathEmpty){
+              this.noDataToDisplay = 'No data to display...';
+            }
           } else {
             this.noDataToDisplay = 'No data to display...';
           }
