@@ -22,14 +22,14 @@
     <div class="col-sm-3">
       <select class="form-select form-control" aria-label="Default select example" id="country" #country>
         <option value="" disabled selected hidden>Select a country...</option>
-        <option value="malaysia">Brazil</option>
+        <option value="brazil">Brazil</option>
         <option value="canada">Canada</option>
-        <option value="malaysia">France</option>
-        <option value="malaysia">Japan</option>
+        <option value="france">France</option>
+        <option value="japan">Japan</option>
         <option value="malaysia">Malaysia</option>
         <option value="singapore">Singapore</option>
-        <option value="malaysia">South Korea</option>
         <option value="united states">United States</option>
+        <option value="vietnam">Vietnam</option>
     </select>
       <button style="margin-top: 3px" *ngIf="!isLoading"
               class="btn btn-primary" (click)="getCovidInfo(country.value)">

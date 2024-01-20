@@ -1,0 +1,68 @@
+<div class="col-sm">
+  <div class="jumbotron" style="margin-top: 3rem">
+    <h1 class="display-4">Reactive Forms</h1>
+    <p class="lead">
+      Reactive forms provide a model-driven approach to handling form inputs whose values change over time.
+      It uses an explicit and immutable approach to managing the state of a form. Each change to the form state
+      returns a new state, which maintains the integrity of the model between changes.
+    </p>
+    <hr class="my-4">
+    Compared to template-driven forms, Reactive forms provide <strong>synchronous access</strong> to the data model,
+    <strong>immutability</strong> with observable operators, and change tracking through <strong>observable streams</strong>.
+    Useful keywords for Reactive forms are:
+    <ul>
+      <li>(change)/(keyup)</li>
+      <li>FormControl</li>
+      <li>[formGroup]</li>
+      <li>merge (Observables)</li>
+    </ul>
+  </div>
+  <p>
+    A reactive form reacts synchronously. In this case, we subscribed to 3 observables for the 3 inputs (Have, Want, Amount).
+    Currency exchange API will be called each time update is happening for any of them.
+  </p>
+  <form [formGroup]="form">
+    <div class="row">
+      <div class="col-sm">
+        Have currency:
+        <select class="form-select" formControlName="haveCurrency" [attr.disabled]="isLoading ? true:null"
+                (change)="haveCurrency(getValueAmount($event))">
+          <option value="" disabled selected hidden>{{haveCurrency$.getValue()}}</option>
+          <option value="{{cur.symbol}}" *ngFor="let cur of currency; let i = index">{{cur.symbol}}</option>
+        </select>
+      </div>
+      <div class="col-sm">
+        Want currency:
+        <select class="form-select" formControlName="wantCurrency" [attr.disabled]="isLoading ? true:null"
+                (change)="wantCurrency(getValueAmount($event))">
+          <option value="" disabled selected hidden>{{wantCurrency$.getValue()}}</option>
+          <option value="{{cur.symbol}}" *ngFor="let cur of currency; let i = index">{{cur.symbol}}</option>
+        </select>
+      </div>
+      <div class="col-sm">
+        Amount to exchange:
+        <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text">$</span>
+        </div>
+        <input type="text" class="form-control" placeholder="Amount to exchange.." [attr.disabled]="isLoading ? true:null"
+               formControlName="amount" (keyup)="search(getValueAmount($event))">
+        </div>
+      </div>
+      <div class="col-sm" *ngIf="!isLoading">
+        You now have
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text">$</span>
+          </div>
+        <div class="form-control">{{exchangeData.new_amount || 0}}</div>
+        </div>
+      </div>
+      <div class="col-sm" *ngIf="isLoading" style="line-height: 5rem;">
+        <div class="spinner-border spinner-border-sm" role="status">
+          <span class="sr-only">Loading...</span>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
