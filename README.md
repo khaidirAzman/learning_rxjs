@@ -8,5 +8,9 @@ Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The appli
 
 ## Introduction
 
-This project showcases how we can use RxJS in our Angular apps for consuming RESTful API's, Event handling, and also State Management using NgRX.
+This project showcases how we can use RxJS in our Angular apps for consuming RESTful API's, Event handling, and also Reactive Forms.
 Feel free to comment and contribute to the code.
+
+## Disclaimer
+
+Some error can be found on Github pages dues to routing
