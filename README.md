@@ -13,4 +13,4 @@ Feel free to comment and contribute to the code.
 
 ## Disclaimer
 
-Some error can be found on Github pages dues to routing
+Some error can be found on Github pages due to routing.
