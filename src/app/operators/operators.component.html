@@ -1,0 +1,55 @@
+<div class="col-sm">
+  <div class="jumbotron" style="margin-top: 3rem">
+    <h1 class="display-4">Operators</h1>
+    <p class="lead">
+      RxJS operators provides a vast selection of operators to compliment Reactive programming. Operators can be used to filter,
+      join, condition or handling errors.
+    </p>
+    <hr class="my-4">
+    <p>In this section, we will have a look at different usages of RxJS operators. Full documentation
+      <a href="https://rxjs.dev/guide/operators" target="_blank">here</a></p>. Different types of RxJS operators are:
+    <ul>
+      <li>Mathematical</li>
+      <li>Filtering</li>
+      <li>Error handling</li>
+      <li>Conditional</li>
+      <li>Joining </li>
+    </ul>
+    Seconds passed since load time with timer(): <strong>{{timer$ | async}} seconds</strong><br/>
+    Seconds passed since load time with interval(): <strong>{{interval$ | async}} seconds</strong>
+  </div>
+  <div class="row">
+      <div class="card col-sm">
+        num$ = of(4,13,21)
+        <h4>Mathematical</h4>
+        <ul>
+          <li>count() = {{count$| async}}</li>
+          <li>max() = {{max$ | async}}</li>
+          <li>min() = {{min$ | async}}</li>
+        </ul>
+      </div>
+      <div class="card col-sm">
+        num2$ = of(1,16,28)
+        <h4>Joining</h4>
+        <ul>
+          <li>count() = {{count2$| async}}</li>
+          <li>max() = {{max2$ | async}}</li>
+          <li>min() = {{min2$ | async}}</li>
+          <li>reduce(a+x) = {{reduce2$ | async}}</li>
+        </ul>
+      </div>
+      <div class="card col-sm">
+        <h4>Filtering</h4>
+        <ul>
+          <li id="filter">filter(x<5) = {{filter$ | async}}</li>
+        </ul>
+      </div>
+      <div class="card col-sm">
+        <h4>Transformation</h4>
+        <ul>
+          <li>map(2*x) = {{map$ | async}}</li>
+          <li>reduce(a+x) = {{reduce$ | async}}</li>
+        </ul>
+      </div>
+  </div>
+</div>

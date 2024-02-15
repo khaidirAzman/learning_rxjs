@@ -3,15 +3,18 @@ import {HomeComponent} from "./home/home.component";
 import {HttpComponent} from "./http/http.component";
 import {NgModule} from "@angular/core";
 import {EventHandlerComponent} from "./event-handler/event-handler.component";
-import {StateManagementComponent} from "./state-management/state-management.component";
 import {RxjsFormComponent} from "./rxjs-form/rxjs-form.component";
+import {OperatorsComponent} from "./operators/operators.component";
+import {HotColdObservableComponent} from "./hot-cold-observable/hot-cold-observable.component";
 
 export const routes: Routes = [
   {path: '', component:HomeComponent},
   {path: 'http', component:HttpComponent},
   {path: 'event', component:EventHandlerComponent},
-  {path: 'state', component:StateManagementComponent},
-  {path: 'form', component:RxjsFormComponent}
+  {path: 'operators', component:OperatorsComponent},
+  {path: 'form', component:RxjsFormComponent},
+  {path: 'hotColdObservable', component:HotColdObservableComponent},
+  {path: '**', component:HomeComponent} //wildcard route
 ];
 
 @NgModule({

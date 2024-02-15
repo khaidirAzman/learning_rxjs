@@ -1,0 +1,52 @@
+<div class="col-sm">
+  <div class="jumbotron" style="margin-top: 3rem">
+    <h1 class="display-4">Hot & Cold Observables</h1>
+    <p class="lead">
+      RxJS Observables can either be hot or cold.
+    </p>
+    <hr class="my-4">
+    <p>In this section, we will have a look at the differences between these two types of Observables. More info can be found
+      <a href="https://www.decodedfrontend.io/hot-vs-cold-observable-in-rxjs/" target="_blank">here.</a></p>
+    <p>By definition, there are 3 main differences between Hot and Cold Observables:</p>
+    <ol>
+      <li><strong>Data production :</strong><br/>
+        If produced <strong>inside</strong> the Observable, it is Cold.
+        If produced <strong>outside</strong> the Observable, it is Hot.
+      </li>
+      <li><strong>Cast type :</strong><br/>
+        Cold Observables are <strong>unicast</strong>.
+        Hot Observables are <strong>multicast</strong>.
+      </li>
+      <li><strong>Value emission :</strong><br/>
+        Cold Observables emit <strong>only when subscribed to</strong>.
+        Hot Observables emit <strong>always even without subscription</strong>.
+      </li>
+    </ol>
+    <p>Useful operator to turn Cold Observables to Hot are: <strong>shareReplay()</strong> and <strong>fromEvent()</strong></p>
+
+    Timer is emitting 1 value per second. <span #test *ngIf="timer$ | async as timer">{{timer}}</span>
+  </div>
+  <div class="container">
+    <div class="row">
+      <div class="card col-sm">
+        <h4>Unicasting</h4>
+        <p *ngIf="video$ | async as video">{{video}}</p>
+        <p *ngIf="video$ | async as video">{{video}}</p>
+        <p *ngIf="video$ | async as video">{{video}}</p>
+      </div>
+      <div class="card col-sm">
+        <h4>Multicasting (with shareReplay())</h4>
+        <p *ngIf="videoShareReplay$ | async as videoShareReplay">{{videoShareReplay}}</p>
+        <p *ngIf="videoShareReplay$ | async as videoShareReplay">{{videoShareReplay}}</p>
+        <p *ngIf="videoShareReplay$ | async as videoShareReplay">{{videoShareReplay}}</p>
+      </div>
+      <div class="card col-sm">
+        <h4>Multicasting (with share())</h4>
+        <button class="btn btn-success" #btn>Click & Generate Random</button>
+        <p *ngIf="click$ | async as click">{{click}}</p>
+        <p *ngIf="click$ | async as click">{{click}}</p>
+        <p *ngIf="click$ | async as click">{{click}}</p>
+      </div>
+    </div>
+  </div>
+</div>
